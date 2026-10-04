@@ -44,7 +44,7 @@ ch02–ch39        pending
 复习队列         5 项  全部属 ch00  到期 2026-10-03（已逾期）
 达标章节         0
 插图             17 张已提取，6 张已人工核对
-回归             67 PASS / 0 FAIL
+回归             73 PASS / 0 FAIL
 引文校验         94/94 clean
 ```
 
@@ -93,13 +93,13 @@ ch02–ch39        pending
 | 部分 | 规模 | 归属 |
 | --- | --- | --- |
 | `skills/deep-reader/` | 16 文件 · 1308 行 shell · 989 行文档 | **外部**，MIT，[tronghieu/agent-skills](https://github.com/tronghieu/agent-skills)，版权 Hieu T. Luu。未改动 |
-| `skills/book-companion/scripts/` | 1902 行 Python | 自研 |
-| `skills/book-companion/` 规则文档 | 1168 行（SKILL.md + 5 篇 references） | 自研 |
-| `skills/book-companion/tests/` | 673 行 · 67 用例 | 自研 |
+| `skills/book-companion/scripts/` | 1929 行 Python | 自研 |
+| `skills/book-companion/` 规则文档 | 1220 行（SKILL.md + 5 篇 references） | 自研 |
+| `skills/book-companion/tests/` | 772 行 · 73 用例 | 自研 |
 | `skills/book-companion/templates/` | 140 行 | 自研 |
 | 项目级（README + install.sh） | 355 行 | 自研 |
 
-代码量上自研约 2600 行 Python vs vendor 1300 行 shell。但**行数不等于贡献比例**，
+代码量上自研约 2700 行 Python vs vendor 1300 行 shell。但**行数不等于贡献比例**，
 真实的分工是：
 
 **直接复用 deep-reader 的**（不重写，这是刻意决定）：
@@ -193,12 +193,15 @@ cd "books/思考快与慢-notes" && python3 ../../skills/book-companion/scripts/
 
 | 项 | 卡在哪 |
 | --- | --- |
-| **是否 git init** | 非 git 仓库。更要紧的是 vendor 的 deep-reader 没记 commit SHA，而 README 说"包装不改 vendor 是为了上游更新还能直接合并"——没有基线版本号，这个承诺无法兑现 |
-| **自研部分的许可** | 无 LICENSE 文件，`manifest.json` 无 license 字段。vendor 侧归属一丝不苟，自研侧空缺。取决于是自用还是发布 |
 | **ch10–ch38 的精读粒度** | `map.md` 明确写着"待读者体验五步循环后决定"。全书逐章 42 份笔记约需 60–80 万 token；按部分合并则每单元过大 |
 | **ch00 是否重考** | 三处记录都写"由复习结果决定"，复习尚未做 |
 | **ch01 原文曝露** | 读者在 ch01 讲解前打开过 `chapters/ch01-1-1-2.txt`，经询问未答复。首答数据的可解释性受影响，`ch01-brief.md` 已标注 |
-| **`progress.md` 的「最后动作」列语义** | 是会话日还是文件编辑日，`state-schema.md` 未定义。目前 ch00 记 10-02、ch01 记 10-04，但 `sessions/` 只有 2026-09-30 一份 |
+| **`review.md` 的「已用题面」字段** | 复习要求换题型，但用过的题面无处存放。加列 vs 另起区块各有代价，见 `framework-gaps.md`「设计分叉」 |
+| **`regression_results.md` 是否保留** | 已改为自动重生成，但文件本身意义有限，可考虑改为 CI 产物 |
+
+已闭合（原在本表，定位确定为公开发布后解决）：git init 与 vendor 基线 SHA、
+自研部分许可、`最后动作` 列语义。经过见 `framework-gaps.md`
+「发布准备中闭合的项」。
 
 ---
 

@@ -2,8 +2,8 @@
 
 > 本文件由 `tests/run_regression.py` **每次运行自动重写**，不要手改。
 
-- 运行时间: 2026-10-04T11:55:42
-- 通过: 67
+- 运行时间: 2026-10-04T12:55:38
+- 通过: 73
 - 失败: 0
 - 跳过: 0
 
@@ -23,6 +23,12 @@
 | PASS | teaching-loop 含回答规则声明要求 | — |
 | PASS | SKILL.md 硬规则同步了这两条 | — |
 | PASS | 导读稿模板提示拆章判断与场景题比例 | — |
+| PASS | state-schema 定义了「最后动作」语义 | — |
+| PASS | manifest.json 是合法 JSON | — |
+| PASS | manifest 声明了许可与归属 | 缺少 [] |
+| PASS | manifest 保留 deep-reader 的来源与许可 | {"source": "https://github.com/tronghieu/agent-skills", "license": "MIT", "vendored_at": "../deep-reader", "required_mode": "study"} |
+| PASS | manifest 的 commands 与 router 子命令一致 | manifest=['init', 'mark', 'next', 'review', 'status', 'where'] router=['init', 'mark', 'next', 'review', 'status', 'where'] |
+| PASS | manifest 的 chapter_states 与代码一致 | manifest=['pending', 'briefed', 'taught', 'checked', 'passed', 'skipped'] code=['pending', 'briefed', 'taught', 'checked', 'passed', 'skipped'] |
 | PASS | deep-reader 已 vendor | skills/deep-reader |
 | PASS | deep-reader LICENSE 保留 | — |
 | PASS | deep-reader 关键脚本齐全 | 缺少 [] |
@@ -48,10 +54,10 @@
 | PASS | notes/ 为空时阶段一判据不通过 | ['notes/ 下没有逐章笔记'] |
 | PASS | init 在阶段一未完成时退出码 3（与 argparse 的 2 区分） | {"ok": false, "reason": "阶段一未完成，不能开始导读", "detail": {"ok": false, "missing": ["notes/ 下没有逐章笔记"], "notes_count": 0, "chapters_count": 3}, "next_action": "回到 deep-reader 跑完 study 模式，见 references/ingest.md"} |
 | PASS | 完整工作区判据通过 | {'ok': True, 'missing': [], 'notes_count': 3, 'chapters_count': 3} |
-| PASS | init 建立三个状态文件 | {"companion_dir": "/private/var/folders/_w/_d1wp5w10970tky7kg9v4m700000gn/T/book-companion-test-j43gw76i/flow/synthetic-notes/companion", "created": ["progress.md", "learner.md", "review.md"], "skipped": [], "chapters": 3, "ok": true, "book": "合成书"} |
+| PASS | init 建立三个状态文件 | {"companion_dir": "/private/var/folders/_w/_d1wp5w10970tky7kg9v4m700000gn/T/book-companion-test-1_lqh3pn/flow/synthetic-notes/companion", "created": ["progress.md", "learner.md", "review.md"], "skipped": [], "chapters": 3, "ok": true, "book": "合成书"} |
 | PASS | init 建立 briefs/ 与 sessions/ | — |
 | PASS | init 无缺笔记告警 | — |
-| PASS | init 幂等（已存在不覆盖） | {"companion_dir": "/private/var/folders/_w/_d1wp5w10970tky7kg9v4m700000gn/T/book-companion-test-j43gw76i/flow/synthetic-notes/companion", "created": [], "skipped": ["progress.md", "learner.md", "review.md"], "chapters": 3, "ok": true, "book": "合成书"} |
+| PASS | init 幂等（已存在不覆盖） | {"companion_dir": "/private/var/folders/_w/_d1wp5w10970tky7kg9v4m700000gn/T/book-companion-test-1_lqh3pn/flow/synthetic-notes/companion", "created": [], "skipped": ["progress.md", "learner.md", "review.md"], "chapters": 3, "ok": true, "book": "合成书"} |
 | PASS | where 指向 ch01 | {"id": "ch01", "title": "阅读的活动", "state": "pending"} |
 | PASS | next 给出笔记与页码 | {"id": "ch01", "title": "阅读的活动", "state": "pending", "pages": [1, 10]} |
 | PASS | mark 推进到 passed 并记录费曼 | {"章节": "ch01", "标题": "阅读的活动", "状态": "passed", "费曼": "已做", "首答正确率": "4/5", "最后动作": "2026-10-04"} |

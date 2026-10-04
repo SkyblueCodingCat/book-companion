@@ -240,7 +240,7 @@ MIT，来自 [tronghieu/agent-skills](https://github.com/tronghieu/agent-skills)
 
 ### 自研与复用的边界
 
-代码量上自研约 2600 行 Python（含 67 个回归用例）、1168 行规则文档；
+代码量上自研约 2700 行 Python（含 73 个回归用例）、1220 行规则文档；
 vendor 约 1300 行 shell。但行数不说明分工，实际是三层：
 
 **直接复用 deep-reader 的**（刻意不重写）：多遍读方法论、`[[page N]]` 页码

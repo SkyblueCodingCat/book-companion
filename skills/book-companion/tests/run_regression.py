@@ -487,6 +487,66 @@ def test_references_present() -> None:
         "4 个以上必须拆" in brief_tpl and "场景题比例" in brief_tpl,
     )
 
+    # 「最后动作」的语义曾长期未定义，被误读成会话日。定义落在 state-schema.md，
+    # 同样无代码可测，用文本断言锚定。
+    schema = (SKILL_DIR / "references" / "state-schema.md").read_text(encoding="utf-8")
+    check(
+        "state-schema 定义了「最后动作」语义",
+        "### 最后动作" in schema and "不是会话日" in schema,
+    )
+
+
+def test_manifest() -> None:
+    """manifest.json 是对外的元数据，容易与代码漂移而没人发现。"""
+    path = SKILL_DIR / "manifest.json"
+    try:
+        manifest = json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as exc:
+        check("manifest.json 是合法 JSON", False, str(exc))
+        return
+    check("manifest.json 是合法 JSON", True)
+
+    missing = [k for k in ("license", "author", "repository") if not manifest.get(k)]
+    check("manifest 声明了许可与归属", not missing, f"缺少 {missing}")
+
+    # vendor 的归属不能丢——这是 MIT 的要求，不只是礼貌。
+    dep = manifest.get("depends_on", {}).get("deep-reader", {})
+    check(
+        "manifest 保留 deep-reader 的来源与许可",
+        dep.get("source") and dep.get("license"),
+        json.dumps(dep, ensure_ascii=False),
+    )
+
+    # 以下两项防漂移：manifest 对外宣称的命令集与状态机，必须等于代码里的实际值。
+    sys.path.insert(0, str(SKILL_DIR / "scripts"))
+    import companion_router as router
+
+    # 取子命令只能走 argparse 的私有结构。拿不到就 SKIP——
+    # 这条用例的价值不值得让整个回归因 argparse 内部变动而崩掉。
+    actual: set[str] | None = None
+    try:
+        for action in router.build_parser()._subparsers._group_actions:  # noqa: SLF001
+            if getattr(action, "choices", None):
+                actual = set(action.choices)
+                break
+    except (AttributeError, TypeError):
+        actual = None
+
+    declared = set(manifest.get("commands", []))
+    if actual is None:
+        record("SKIP", "manifest 的 commands 与 router 子命令一致", "argparse 内部结构取不到子命令")
+    else:
+        check(
+            "manifest 的 commands 与 router 子命令一致",
+            declared == actual,
+            f"manifest={sorted(declared)} router={sorted(actual)}",
+        )
+    check(
+        "manifest 的 chapter_states 与代码一致",
+        tuple(manifest.get("chapter_states", ())) == tuple(ws.CHAPTER_STATES),
+        f"manifest={manifest.get('chapter_states')} code={list(ws.CHAPTER_STATES)}",
+    )
+
 
 def test_vendored_deep_reader() -> None:
     vendor = SKILL_DIR.parent / "deep-reader"
@@ -685,6 +745,7 @@ def main() -> int:
         test_markdown_roundtrip()
         test_templates_present()
         test_references_present()
+        test_manifest()
         test_vendored_deep_reader()
         test_cjk_pagination(root)
         test_ingest_gate(root)

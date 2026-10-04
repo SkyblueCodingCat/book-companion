@@ -2,6 +2,9 @@
   "name": "book-companion",
   "version": "0.1.0",
   "description": "Read a whole book through conversation: deep-reader builds the book's knowledge representation, book-companion teaches it chapter by chapter with retrieval checks, persistent progress, and spaced review.",
+  "license": "MIT",
+  "author": "SkyblueCodingCat",
+  "repository": "https://github.com/SkyblueCodingCat/book-companion",
   "entry": "scripts/companion_router.py",
   "commands": [
     "init",
