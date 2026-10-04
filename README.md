@@ -231,7 +231,8 @@ PDF 仍委托回 deep-reader，因为 `pdftotext` 用真实 form feed 分页，�
 
 ## 许可与出处
 
-本项目 **MIT**，见 [LICENSE](LICENSE)。
+本项目 **MIT**，见 [LICENSE](LICENSE)。第三方组件与设计借鉴的完整归属见
+[NOTICE](NOTICE)。
 
 `skills/deep-reader/` 是 vendored 的外部组件，**未作任何修改**，单独授权：
 MIT，来自 [tronghieu/agent-skills](https://github.com/tronghieu/agent-skills)，

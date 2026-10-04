@@ -1,0 +1,48 @@
+book-companion
+Copyright (c) 2026 SkyblueCodingCat
+Licensed under the MIT License. See LICENSE.
+
+================================================================================
+Third-party components
+================================================================================
+
+skills/deep-reader/
+--------------------------------------------------------------------------------
+    Project:   tronghieu/agent-skills
+    Source:    https://github.com/tronghieu/agent-skills
+    Copyright: Hieu T. Luu
+    License:   MIT (full text at skills/deep-reader/LICENSE)
+
+Vendored unmodified. The pinned baseline commit and the procedure for syncing
+with upstream are documented in VENDOR.md.
+
+book-companion deliberately does not patch this component. All CJK fixes live
+in skills/book-companion/scripts/ as bypasses so that upstream updates remain
+mergeable. See framework-gaps.md for which upstream behaviours are bypassed
+and why.
+
+
+Design influences (no code reused)
+--------------------------------------------------------------------------------
+The following projects shaped parts of the design but contributed no code.
+Attribution is recorded here and at the point of use in the relevant files.
+
+    SebastianElvis/hammer           spaced-review tiers (1/3/7/21 days),
+    https://github.com/SebastianElvis/hammer
+                                    persistent learner state
+
+    orhoncan/deep-study-skill       command shape (where / next / review)
+    https://github.com/orhoncan/deep-study-skill
+
+The multi-pass reading methodology inherited through deep-reader traces back to
+Mortimer J. Adler and Charles Van Doren, "How to Read a Book"; the SQ3R recite
+step; and S. Keshav, "How to Read a Paper".
+
+
+================================================================================
+Book content
+================================================================================
+
+This repository contains no book content. Users must supply books they have the
+right to read. Working directories under books/ are excluded from version
+control: books are copyrighted and the reading state is personal.

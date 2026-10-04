@@ -256,7 +256,7 @@ teaching-loop.md"的标记已完成但未清，导致冷读的 agent 差点照�
 | 原待决项 | 当时卡在哪 | 怎么解决的 |
 | --- | --- | --- |
 | 非 git 仓库，vendor 未记 commit SHA | 「不改 vendor 以便上游可合并」这一取舍无基线版本号即无法兑现 | `git init` + 两个 commit（vendor 引入独立可见）。基线 `40cc59c` 记入 `VENDOR.md`，含同步流程 |
-| 自研部分无 LICENSE | vendor 侧归属一丝不苟，自研侧空缺 | 根目录 `LICENSE`（MIT，含第三方组件节）+ `manifest.json` 补 `license`/`author`/`repository` 三字段 |
+| 自研部分无 LICENSE | vendor 侧归属一丝不苟，自研侧空缺 | 根目录 `LICENSE`（纯 MIT 正文）+ `NOTICE`（第三方组件与设计借鉴）+ `manifest.json` 补 `license`/`author`/`repository`。**LICENSE 必须保持纯净**——首次发布时把第三方说明附在 MIT 正文后面，GitHub 的 licensee 检测器判定为 `NOASSERTION`，仓库页不显示 MIT 徽标 |
 | `progress.md` 的「最后动作」列语义 | 是会话日还是编辑日，`state-schema.md` 未定义 | `state-schema.md` 新增「最后动作」小节。按脚本实际行为定义为**状态变更日**（`set_state()` 写 `today()`），并写明它不是会话日／编辑日／复习日，以及与 `sessions/` 文件名可以不一致 |
 
 ---

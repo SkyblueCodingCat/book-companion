@@ -19,21 +19,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
----
-
-## Third-party components
-
-`skills/deep-reader/` is vendored from an external project and licensed
-separately. See `skills/deep-reader/LICENSE` for its full text.
-
-    Project:   tronghieu/agent-skills
-    Source:    https://github.com/tronghieu/agent-skills
-    Copyright: Hieu T. Luu
-    License:   MIT
-
-The vendored copy is unmodified. See `VENDOR.md` for the pinned baseline and
-the procedure for syncing with upstream.
-
-This repository contains no book content. Users must supply books they have
-the right to read.

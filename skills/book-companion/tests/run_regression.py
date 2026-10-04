@@ -548,6 +548,50 @@ def test_manifest() -> None:
     )
 
 
+def test_licensing() -> None:
+    """许可文件。LICENSE 必须保持纯净，归属信息走 NOTICE。
+
+    首次发布时第三方说明被附在 MIT 正文后面，GitHub 的 licensee 检测器
+    对改动过的许可文本直接判 NOASSERTION，仓库页不显示 MIT 徽标。
+    归属一个字都不能少，但不能放在 LICENSE 里。
+    """
+    root = SKILL_DIR.parent.parent
+    lic_path = root / "LICENSE"
+    notice_path = root / "NOTICE"
+
+    check("根目录有 LICENSE", lic_path.is_file())
+    check("根目录有 NOTICE", notice_path.is_file())
+    if not (lic_path.is_file() and notice_path.is_file()):
+        return
+
+    lic = lic_path.read_text(encoding="utf-8")
+    notice = notice_path.read_text(encoding="utf-8")
+
+    check(
+        "LICENSE 是 MIT 正文",
+        "MIT License" in lic and "WITHOUT WARRANTY OF ANY KIND" in lic,
+    )
+    # 这条是关键护栏：任何附加节都会让 GitHub 放弃识别许可。
+    contaminants = [
+        marker
+        for marker in ("Third-party", "##", "---", "deep-reader")
+        if marker in lic
+    ]
+    check(
+        "LICENSE 不含附加内容（否则 GitHub 判 NOASSERTION）",
+        not contaminants,
+        f"发现 {contaminants}，应移到 NOTICE",
+    )
+    check(
+        "NOTICE 保留 vendor 归属",
+        "Hieu T. Luu" in notice and "tronghieu/agent-skills" in notice,
+    )
+    check(
+        "NOTICE 保留设计借鉴归属",
+        "hammer" in notice and "deep-study-skill" in notice,
+    )
+
+
 def test_vendored_deep_reader() -> None:
     vendor = SKILL_DIR.parent / "deep-reader"
     # 说明里只放相对路径——regression_results.md 会入版本库，
@@ -746,6 +790,7 @@ def main() -> int:
         test_templates_present()
         test_references_present()
         test_manifest()
+        test_licensing()
         test_vendored_deep_reader()
         test_cjk_pagination(root)
         test_ingest_gate(root)
