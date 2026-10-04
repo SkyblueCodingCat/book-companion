@@ -1,0 +1,29 @@
+# ---- 书籍与个人学习数据：绝不入库 ----
+# 书有版权，工作区是高度个人化的学习状态（含答题记录、误解原话、进度分数）
+books/*
+!books/.gitkeep
+!books/README.md
+
+# deep-reader 工作区：全文、切片、插图、笔记、companion/ 状态全在这里
+*-notes/
+
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# ---- 编辑器与 IDE ----
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.\#*
+\#*\#
+
+# ---- 系统 ----
+.DS_Store
+Thumbs.db
+desktop.ini

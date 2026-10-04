@@ -1,0 +1,30 @@
+{
+  "name": "book-companion",
+  "version": "0.1.0",
+  "description": "Read a whole book through conversation: deep-reader builds the book's knowledge representation, book-companion teaches it chapter by chapter with retrieval checks, persistent progress, and spaced review.",
+  "entry": "scripts/companion_router.py",
+  "commands": [
+    "init",
+    "where",
+    "next",
+    "mark",
+    "review",
+    "status"
+  ],
+  "chapter_states": [
+    "pending",
+    "briefed",
+    "taught",
+    "checked",
+    "passed",
+    "skipped"
+  ],
+  "depends_on": {
+    "deep-reader": {
+      "source": "https://github.com/tronghieu/agent-skills",
+      "license": "MIT",
+      "vendored_at": "../deep-reader",
+      "required_mode": "study"
+    }
+  }
+}
